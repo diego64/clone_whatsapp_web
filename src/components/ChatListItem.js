@@ -1,9 +1,13 @@
 import React from 'react';
 import './ChatListItem.css';
 
-export default () => {
+export default ({onClick, active}) => {
     return (
-        <div className="chatListItem">
+        <div 
+            //Condição para amostrar a mensagem na tela
+            className={`chatListItem ${active ? 'active' : ''}`}
+            onClick={onClick}
+        >
             <img className="chatListItem--avatar" src="https://www.pluspixel.com.br/wp-content/uploads/avatar-1.png" alt="" />
             <div className="chatListItem--lines">
                 <div className="chatListItem--line">
