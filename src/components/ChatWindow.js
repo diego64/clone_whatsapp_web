@@ -13,8 +13,10 @@ import MicIcon from '@material-ui/icons/Mic';
 export default () => {
 
     const [emojiOpen, setEmojiOpen] = useState(false);
+    const [text, setText] = useState('');
 
-    const handleEmojiClick = () => {
+    const handleEmojiClick = (e, emojiObject) => {
+        setText(text + emojiObject.emoji);
     }
 
     const handleOpenEmoji = () => {
@@ -23,6 +25,14 @@ export default () => {
 
     const handleCloseEmoji = () => {
         setEmojiOpen(false)
+    }
+
+    const handleMicClick = () => {
+
+    }
+
+    const handleSendClick = () => {
+        
     }
 
     return (
@@ -67,6 +77,7 @@ export default () => {
                     <div 
                         className="chatWindow--btn"
                         onClick={handleCloseEmoji}
+                        style={{width: emojiOpen ? 40 : 0}}
                         >
                             <CloseIcon style={{color: '#919191'}} />
                     </div>
@@ -75,7 +86,8 @@ export default () => {
                     className="chatWindow--btn"
                     onClick={handleOpenEmoji}
                     >
-                        <InsertEmoticonIcon style={{color: '#919191'}} />
+                        <InsertEmoticonIcon 
+                            style={{color: emojiOpen ? '#009688' : '#919191'}} />
                     </div>
                 </div>
                 
@@ -84,13 +96,32 @@ export default () => {
                         className="chatWindow--input" 
                         type="text" 
                         placeholder="Digite uma mensagem"
+                        value={text}
+                        onChange={e => setText(e.target.value)}
                     />
                 </div>
                 
                 <div className="chatWindow--pos">
-                    <div className="chatWindow--btn">
-                        <SendIcon style={{color: '#919191'}} />
-                    </div>
+
+                    {/* Se a caixa de texto estiver vazia, o microfone vai aparecer*/}
+                    {text === '' && 
+                        <div 
+                            onClick={handleMicClick}
+                            className="chatWindow--btn">
+                            <MicIcon style={{color: '#919191'}} />
+                        </div>
+                    }
+
+                    {/* Se a caixa de texto NÃO estiver vazia, o microfone vai aparecer*/}
+                     {text !== '' && 
+                        <div 
+                            onClick={handleSendClick}
+                            className="chatWindow--btn">
+                            <SendIcon style={{color: '#919191'}} />
+                        </div>
+                     }
+
+                    
                 </div>
             </div>
         </div>

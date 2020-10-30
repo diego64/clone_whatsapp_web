@@ -45,6 +45,8 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    overflow: hidden;
+    transition: all ease 0.3s;
 }
 
 .chatWindow--body {
@@ -52,7 +54,7 @@
     overflow-y: auto;
     background-color: #E5DDD5;
     background-size: cover;
-    background-position: center;
+    background-position: top; /* Ou Center */
     background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
 }
 
