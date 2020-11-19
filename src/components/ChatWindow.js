@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import './ChatWindow.css';
 
@@ -14,6 +14,10 @@ import MicIcon from '@material-ui/icons/Mic';
 
 export default ({user}) => {
 
+    const body = useRef(
+
+    );
+
     let recognition = null;
     let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     
@@ -28,7 +32,40 @@ export default ({user}) => {
         {author:123, body: 'Mensagem de texto'},
         {author:123, body: 'Mensagem de texto 22222'},
         {author:1234, body: 'Mensagem de texto 2222222222'},
+        {author:123, body: 'Mensagem de texto'},
+        {author:123, body: 'Mensagem de texto 22222'},
+        {author:1234, body: 'Mensagem de texto 2222222222'},
+        {author:123, body: 'Mensagem de texto'},
+        {author:123, body: 'Mensagem de texto 22222'},
+        {author:1234, body: 'Mensagem de texto 2222222222'},
+        {author:123, body: 'Mensagem de texto'},
+        {author:123, body: 'Mensagem de texto 22222'},
+        {author:1234, body: 'Mensagem de texto 2222222222'},
+        {author:123, body: 'Mensagem de texto'},
+        {author:123, body: 'Mensagem de texto 22222'},
+        {author:1234, body: 'Mensagem de texto 2222222222'},
+        {author:123, body: 'Mensagem de texto'},
+        {author:123, body: 'Mensagem de texto 22222'},
+        {author:1234, body: 'Mensagem de texto 2222222222'},
+        {author:123, body: 'Mensagem de texto'},
+        {author:123, body: 'Mensagem de texto 22222'},
+        {author:1234, body: 'Mensagem de texto 2222222222'},
+        {author:123, body: 'Mensagem de texto'},
+        {author:123, body: 'Mensagem de texto 22222'},
+        {author:1234, body: 'Mensagem de texto 2222222222'},
+        {author:123, body: 'Mensagem de texto'},
+        {author:123, body: 'Mensagem de texto 22222'},
+        {author:1234, body: 'Mensagem de texto 2222222222'},
+        {author:123, body: 'Mensagem de texto'},
+        {author:123, body: 'Mensagem de texto 22222'},
+        {author:1234, body: 'Mensagem de texto 2222222222'},
     ]);
+
+    useEffect(() => {
+        if(body.current.scrollHeight > body.current.offsetHeight){
+            body.current.scrollTop = body.current.scrollHeight - body.current.offsetHeight;
+        }
+    }, [list]);
 
     const handleEmojiClick = (e, emojiObject) => {
         setText(text + emojiObject.emoji);
@@ -84,7 +121,7 @@ export default ({user}) => {
                     </div>
                 </div>
             </div>
-            <div className="chatWindow--body">
+            <div ref={body} className="chatWindow--body">
                 {list.map((item, key) => (
                     <MessageItem 
                         key={key}
