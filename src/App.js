@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
+import Api from './Api';
+
+//Importação de arquivos
 import ChatListItem from './components/ChatListItem';
 import ChatIntro from './components/ChatIntro';
 import ChatWindow from './components/ChatWindow';
 import NewChat from './components/NewChat';
+import Login from './components/Login';
 
 //Importação de icones
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
@@ -23,16 +27,26 @@ export default () => {
   ]);
 
   const [activeChat,setActiveChat] = useState({});
-  const [user, setUser] = useState({
-    id: 1234,
-    avatar: 'https://www.w3schools.com/howto/img_avatar.png',
-    name: 'Diego Ferreira'
-  });
+  const [user, setUser] = useState(null);
 
   const [showNewChat, setShowNewChat] = useState(false);
 
   const handleNewChat = () => {
     setShowNewChat(true);
+  }
+
+  const handleLoginData = async (u) => {
+    let newUser = {
+      id: u.uid,
+      name: u.displayName,
+      avatar: u.photoURL
+    };
+    await Api.addUser(newUser);
+    setUser(newUser);
+  }
+
+  if(user === null) {
+    return (<Login onReceive={handleLoginData} />);
   }
 
   return (
