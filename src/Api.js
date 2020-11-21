@@ -19,5 +19,52 @@ export default {
           name: u.name,
           avatar: u.avatar
       }, {merge:true});  
+    },
+
+    getContactList:async (userId) => {
+        let list = [];
+
+        let results = await db.collection('users').get();
+        results.forEach(result => {
+            let data = result.data();
+            //Retirando o meu usuário da lista e listando os contatos
+            if(result.id !== userId) {
+                list.push({
+                    id: result.id,
+                    name: data.name,
+                    avatar: data.avatar
+                });
+            }
+        });
+
+        return list;
+    },
+
+    //Adcionando um novo chat
+    addNewChat:async (user, user2) => {
+        let newChat = await db.collection('chats').add({
+            menssages:[],
+            users:[user.id, user2.id]
+        });
+
+        //Inserindo essa nova conversa na lista de mensagens 
+        db.collection('users').doc(user.id).update({
+            chats: firebase.firestore.FieldValue.arrayUnion({
+                chatId: newChat.id,
+                title: user2.name,
+                image: user2.avatar,
+                with:user2.id
+            })
+        });
+
+        //Inserindo essa nova conversa na lista de mensagens do Usuario 2 
+        db.collection('users').doc(user2.id).update({
+            chats: firebase.firestore.FieldValue.arrayUnion({
+                chatId: newChat.id,
+                title: user.name,
+                image: user.avatar,
+                with:user.id
+            })
+        });
     }
 }

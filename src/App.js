@@ -19,22 +19,21 @@ import userEvent from '@testing-library/user-event';
 
 export default () => {
 
-  const [chatlist, setChatList] = useState([
-    {chatId: 1, title: 'Alex Silva', image: 'https://www.w3schools.com/howto/img_avatar.png'},
-    {chatId: 2, title: 'Alex Silva', image: 'https://www.w3schools.com/howto/img_avatar.png'},
-    {chatId: 3, title: 'Alex Silva', image: 'https://www.w3schools.com/howto/img_avatar.png'},
-    {chatId: 4, title: 'Alex Silva', image: 'https://www.w3schools.com/howto/img_avatar.png'}
-  ]);
-
+  const [chatlist, setChatList] = useState([]);
   const [activeChat,setActiveChat] = useState({});
-  const [user, setUser] = useState(null);
-
+  const [user, setUser] = useState({
+    id: 'BGCCJ5B5lCNLf8rPBWYxXgMCiLg2',
+    name: 'Diego Ferreira',
+    avatar: 'https://graph.facebook.com/3448189721955148/picture',
+  });
   const [showNewChat, setShowNewChat] = useState(false);
 
   const handleNewChat = () => {
     setShowNewChat(true);
   }
 
+  /* Criação do usuário recebendo os dados do Facebook ou se já possui, 
+     só vai ter uma vereficação e autorizar a entrada */
   const handleLoginData = async (u) => {
     let newUser = {
       id: u.uid,
