@@ -4,7 +4,7 @@ import './ChatListItem.css';
 export default ({onClick, active, data}) => {
     return (
         <div 
-            //Condição para amostrar a mensagem na tela
+            //Condição para mostrar a mensagem na tela
             className={`chatListItem ${active ? 'active' : ''}`}
             onClick={onClick}
         >

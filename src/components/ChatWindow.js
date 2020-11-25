@@ -4,6 +4,7 @@ import './ChatWindow.css';
 
 import MessageItem from './MessageItem';
 
+//Importação dos icones
 import SearchIcon from '@material-ui/icons/Search';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import MoreVertIcon from '@material-ui/icons/MoreVert';

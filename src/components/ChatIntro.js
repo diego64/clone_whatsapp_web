@@ -1,6 +1,7 @@
 import React from 'react';
 import './ChatIntro.css';
 
+//Primeira tela
 export default () => {
     return (
        <div className="chatIntro">
