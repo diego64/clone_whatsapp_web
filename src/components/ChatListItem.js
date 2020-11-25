@@ -16,7 +16,7 @@ export default ({onClick, active, data}) => {
                 </div>
                 <div className="chatListItem--line">
                     <div className="chatListItem--lastMsg">
-                        <p>Já está em homologação a versão 1.8</p>
+                    <p>{data.lastMessage}</p>
                     </div>
                 </div>
             </div>
