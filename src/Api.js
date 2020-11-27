@@ -77,7 +77,16 @@ export default {
             if(data.chats) {
                 setChatList(data.chats);
             }
-            }
+           }
         });
+    },
+    //Buscando as mensagens de um determinado usuário da conversa 
+    onChatContent:(chatId, setList) => {
+        return db.collection('chats').doc(chatId).onSnapshot((doc) => {
+            if(doc.exists) {
+                let data = doc.data();
+                setList(data.menssages);
+            }
+        })
     }
 }
