@@ -15,7 +15,7 @@ export default ({onClick, active, data}) => {
             setTime(`${hours}:${minutes}`);
         }
 
-    }, [data])
+    }, [data]);
 
     return (
         <div 

@@ -80,13 +80,51 @@ export default {
            }
         });
     },
+
     //Buscando as mensagens de um determinado usuário da conversa 
-    onChatContent:(chatId, setList) => {
+    onChatContent:(chatId, setList, setUsers) => {
         return db.collection('chats').doc(chatId).onSnapshot((doc) => {
             if(doc.exists) {
                 let data = doc.data();
                 setList(data.menssages);
+                setUsers(data.users)
             }
         })
+    },
+
+    //Envio de mensagem 
+    sendMessage: async (chatData, userId, type, body, users) => {
+        let now = new Date();
+
+        db.collection('chats').doc(chatData.chatId).update({
+            menssages: firebase.firestore.FieldValue.arrayUnion({
+                type,
+                author: userId,
+                body,
+                date: now
+            })
+        });
+
+    //Atualizando as listas de últimas mensagens
+    for(let i in users) {
+        let u = await db.collection('users').doc(users[i]).get();
+        let uData = u.data();
+        if(uData.chats) {
+            let chats = [...uData.chats];
+
+            for(let e in chats) {
+                if(chats[e].chatId === chatData.chatId) {
+                    chats[e].lastMessage = body;
+                    chats[e].lastMessageDate = now;
+                }
+            }
+
+            await db.collection('users').doc(users[i]).update({
+                chats
+            });
+        }
+    }
+
+        
     }
 }

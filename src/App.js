@@ -21,11 +21,7 @@ export default () => {
 
   const [chatlist, setChatList] = useState([]);
   const [activeChat,setActiveChat] = useState({});
-  const [user, setUser] = useState({
-    id: 'BGCCJ5B5lCNLf8rPBWYxXgMCiLg2',
-    name: 'Diego Ferreira',
-    avatar: 'https://graph.facebook.com/3448189721955148/picture',
-  });
+  const [user, setUser] = useState(null);
   const [showNewChat, setShowNewChat] = useState(false);
 
   //Iniciando a aplicação com uma verificação do usuário para listar o chat
